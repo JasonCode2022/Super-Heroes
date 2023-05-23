@@ -1,0 +1,34 @@
+
+version: "3.0"
+
+services:
+  frontend:
+    build:
+      context: ./SuperHero.UI
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"
+
+  api:
+    build:
+      context: ./SwperHeroNg/SuperHeroAPI/SuperHeroAPI
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+
+  db:
+    image: "mcr.microsoft.com/mssql/server:2019-latest"
+    environment:
+      SA_PASSWORD: "Sa_Password"
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Developer"
+    ports:
+      - "1433:1433" 
+      
+      
+
+
+
+      
